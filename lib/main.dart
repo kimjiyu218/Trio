@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:trio/insert.dart';
 import 'package:trio/update.dart';
@@ -39,6 +40,21 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _counter++;
     });
+  }
+
+  void test() async {
+    final Dio dio = Dio(
+      BaseOptions(
+        baseUrl: "https://192.168.0.177:9090",
+        contentType: "application/json",
+      ),
+    );
+    final res = await dio.get("/board/test");
+
+    if(res.statusCode == 200) {
+      print(res.data);
+    }
+
   }
 
   @override
