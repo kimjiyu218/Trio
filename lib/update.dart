@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:trio/update.dart';
+
 
 class Update extends StatefulWidget {
   const Update({Key? key}) : super(key: key);
@@ -22,7 +24,7 @@ class _UpdateState extends State<Update> {
 
   void _updateInquiry() {
     // 여기에 문의 내용을 수정하는 로직을 구현합니다.
-    String name = _nameController.text;
+    String textarea = _nameController.text;
     String email = _emailController.text;
     String inquiry = _inquiryController.text;
 
@@ -58,23 +60,23 @@ class _UpdateState extends State<Update> {
             TextFormField(
               controller: _nameController,
               decoration: InputDecoration(
-                labelText: '이름',
-                hintText: '이름을 입력하세요',
+                labelText: 'Title',
+                hintText: '제목을 입력하세요',
               ),
             ),
             SizedBox(height: 10.0),
             TextFormField(
               controller: _emailController,
               decoration: InputDecoration(
-                labelText: '이메일',
-                hintText: '이메일을 입력하세요',
+                labelText: 'Writer',
+                hintText: '이름을 입력하세요',
               ),
             ),
             SizedBox(height: 10.0),
             TextFormField(
               controller: _inquiryController,
               decoration: InputDecoration(
-                labelText: '문의 내용',
+                labelText: 'Text area',
                 hintText: '문의할 내용을 입력하세요',
                 alignLabelWithHint: true,
                 border: OutlineInputBorder(),
@@ -83,7 +85,7 @@ class _UpdateState extends State<Update> {
             ),
             SizedBox(height: 10.0),
             Text(
-              '이미지 첨부',
+              'Files',
               style: TextStyle(
                 fontSize: 16.0,
                 fontWeight: FontWeight.bold,
@@ -107,7 +109,7 @@ class _UpdateState extends State<Update> {
             SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: _updateInquiry, // 수정 버튼에 함수 연결
-              child: Text('수정하기'),
+              child: Text('Modify'),
             ),
           ],
         ),
