@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:trio/data_class.dart';
 
 import 'package:trio/insert.dart';
+import 'package:trio/screen/join_page.dart';
 import 'package:trio/update.dart';
 
 void main() {
@@ -131,6 +132,24 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
+              InkWell(
+                onTap: (){
+                  Navigator.of(context).push(PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation) {
+                    return JoinPage();
+                  },));
+                },
+                child: Container(
+                  width: 500,
+                  height: 30,
+                  color: Colors.amber,
+                  child: Center(
+                    child: Text(
+                      "회원가입",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
+                ),
+              ),
               SizedBox(
                 height: 800,
                 width: 200,
@@ -155,11 +174,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   child: Text("button"),
                 ),
-              )
+              ),
+
             ],
+
           ),
         ),
+
       ),
+
     );
   }
 }
