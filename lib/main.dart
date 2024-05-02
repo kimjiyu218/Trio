@@ -5,6 +5,7 @@ import 'package:trio/data_class.dart';
 
 import 'package:trio/insert.dart';
 import 'package:trio/update.dart';
+import 'package:trio/screen/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -126,6 +127,24 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Center(
                     child: Text(
                       "수정",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => LoginPage(),
+                  ));
+                },
+                child: Container(
+                  width: 60,
+                  height: 30,
+                  color: Colors.pinkAccent,
+                  child: Center(
+                    child: Text(
+                      "로그인",
                       style: TextStyle(fontSize: 20),
                     ),
                   ),
