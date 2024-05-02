@@ -140,9 +140,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   },));
                 },
                 child: Container(
-                  width: 500,
+                  width: 100,
                   height: 30,
-                  color: Colors.amber,
+                  color: Colors.green,
                   child: Center(
                     child: Text(
                       "회원가입",
