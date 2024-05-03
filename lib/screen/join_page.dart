@@ -22,9 +22,7 @@ class _JoinPageState extends State<JoinPage> {
   TextEditingController _name = TextEditingController();
   TextEditingController _id = TextEditingController();
 
-  //GlobalKey는 전체 앱에서 위젯을 고유하게 식별하는 데 사용됩니다. 동일한 상태의 동일 위젯으로 구성된 컬렉션을 재정렬하거나 추가/삭제하는 등의 작업을 한다면 필요하다.
-  final _formKey = GlobalKey<FormState>();
-  final _key = GlobalKey<ScaffoldState>();
+
 
   @override
   //initState 는 Flutter 위젯의 상태가 초기화될 때 호출되는 메소드입니다. 이 메소드는 StatefulWidget 클래스에서 오버라이드 하여 상태 초기화 로직을 구현할 수 있습니다.
@@ -53,12 +51,12 @@ class _JoinPageState extends State<JoinPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _key,
+
       appBar: AppBar(
         title: Text("계정 만들기 "),
       ),
       body: Form(
-        key: _formKey,
+
         child: Center(
           child: ListView(
             shrinkWrap: true,
@@ -123,9 +121,8 @@ class _JoinPageState extends State<JoinPage> {
                   color: Colors.red,
                   child: MaterialButton(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        Navigator.pop(context);
-                      }
+
+
                     },
                     child: Text(
                       "계정 만들기",
