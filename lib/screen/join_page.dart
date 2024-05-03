@@ -55,8 +55,8 @@ class _JoinPageState extends State<JoinPage> {
     String joinEmail = _email.text;
 
     if(joinId.length <= 12){
-            showDialog(context: context, builder: bui)
-    }
+
+
 
     }
   }
