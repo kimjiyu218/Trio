@@ -3,8 +3,70 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:trio/screen/join_page.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController _id = TextEditingController();
+  TextEditingController _pw = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _id = TextEditingController(text: "");
+    _pw = TextEditingController(text: "");
+  }
+
+  @override
+  void dispose() {
+    _id.dispose();
+    _pw.dispose();
+    super.dispose();
+  }
+
+  void login() {
+    String loginId = _id.text;
+    String loginPw = _pw.text;
+
+    if (loginId.length >= 12) {
+      showDialog(
+          context: context,
+          builder: (BuildContext ctx) {
+            return AlertDialog(
+              content: Text("ID 또는 비밀번호가 맞지 않습니다"),
+              actions: [
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('확인'),
+                ),
+              ],
+            );
+          });
+    }
+    if (loginPw.length >= 12) {
+      showDialog(
+          context: context,
+          builder: (BuildContext ctx) {
+            return AlertDialog(
+              content: Text("비밀번호가 맞지 않습니다"),
+              actions: [
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('확인'),
+                ),
+              ],
+            );
+          });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,12 +74,11 @@ class LoginPage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-
             Container(
-              margin: EdgeInsets.only(top: 100,bottom: 30),
+              margin: EdgeInsets.only(top: 100, bottom: 30),
               child: Text(
                 '로그인',
-                style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
             ),
             Container(
@@ -29,6 +90,7 @@ class LoginPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(50),
               ),
               child: TextField(
+                controller: _id,
                 decoration: InputDecoration(
                   hintText: '아이디',
                   border: InputBorder.none,
@@ -44,6 +106,7 @@ class LoginPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(50),
               ),
               child: TextField(
+                controller: _pw,
                 decoration: InputDecoration(
                   hintText: '비밀번호',
                   border: InputBorder.none,
@@ -54,29 +117,31 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 40),
             Center(
               child: ElevatedButton(
-                  onPressed: ()  {
-                  },
+                onPressed: () {
+                  login();
+                },
                 style: ButtonStyle(
                   backgroundColor:
-                    MaterialStateProperty.all<Color>(Color(0xFF009C89)),
-                    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                      MaterialStateProperty.all<Color>(Color(0xFF009C89)),
+                  padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                       EdgeInsets.symmetric(horizontal: 100, vertical: 10)),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    elevation: MaterialStateProperty.all<double>(3),
+                  ),
+                  elevation: MaterialStateProperty.all<double>(3),
                 ),
                 child: Container(
                   decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(50)),
+                      BoxDecoration(borderRadius: BorderRadius.circular(50)),
                   width: 80,
                   child: Center(
                     child: Text(
                       '로그인',
-                      style: TextStyle(color: Colors.white,
-                      fontSize: 15,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
                       ),
                     ),
                   ),
@@ -86,8 +151,7 @@ class LoginPage extends StatelessWidget {
             InkWell(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => JoinPage())
-                );
+                    MaterialPageRoute(builder: (context) => JoinPage()));
               },
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(160, 8, 0, 10),
@@ -106,6 +170,3 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
-
-
-
