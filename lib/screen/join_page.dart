@@ -17,12 +17,10 @@ class _JoinPageState extends State<JoinPage> {
   //텍스트 입력값을 가져오는 Controller 단 입니다.
 
   TextEditingController _email = TextEditingController();
-  TextEditingController _password = TextEditingController();
-  TextEditingController _password2 = TextEditingController();
+  TextEditingController _pw = TextEditingController();
+  TextEditingController _pw2 = TextEditingController();
   TextEditingController _name = TextEditingController();
   TextEditingController _id = TextEditingController();
-
-
 
   @override
   //initState 는 Flutter 위젯의 상태가 초기화될 때 호출되는 메소드입니다. 이 메소드는 StatefulWidget 클래스에서 오버라이드 하여 상태 초기화 로직을 구현할 수 있습니다.
@@ -32,8 +30,8 @@ class _JoinPageState extends State<JoinPage> {
     _name = TextEditingController(text: "");
     _id = TextEditingController(text: "");
     _email = TextEditingController(text: "");
-    _password = TextEditingController(text: "");
-    _password2 = TextEditingController(text: "");
+    _pw = TextEditingController(text: "");
+    _pw2 = TextEditingController(text: "");
   }
 
   @override
@@ -42,34 +40,116 @@ class _JoinPageState extends State<JoinPage> {
     _name.dispose();
     _id.dispose();
     _email.dispose();
-    _password.dispose();
-    _password2.dispose();
+    _pw.dispose();
+    _pw2.dispose();
     //super.dispose를 호출하여 부모 클래스의 dispose 메소드를 실행하여 추가적인 정리 작업을 수행할 수 있습니다.
     super.dispose();
   }
 
-  void join(){
-    String joinId =_id.text;
-    String joinPw = _password.text;
+  bool isValidEmail(String email) {
+    // 이메일 주소의 정규식
+    final RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    return emailRegex.hasMatch(email);
+  }
+
+  void check() {
+    String email = "example@example.com"; // 여기에 확인할 이메일 주소를 넣으세요
+    if (isValidEmail(email)) {
+      print("$email은(는) 유효한 이메일 주소입니다.");
+    } else {
+      print("$email은(는) 유효하지 않은 이메일 주소입니다.");
+    }
+  }
+
+  void join() {
+    String joinId = _id.text;
+    String joinPw = _pw.text;
     String joinName = _name.text;
     String joinEmail = _email.text;
 
-    if(joinId.length <= 12){
+    if (joinId.length >= 13) {
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext ctx) {
+            return AlertDialog(
+              content: Text(" ID는 12자리이하 까지만 가능합니다. "),
+              actions: [
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('확인'),
+                ),
+              ],
+            );
+          });
+      return;
+    }
+    if (joinPw.length >= 13) {
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext ctx) {
+            return AlertDialog(
+              content: Text(" 패스워드는 12자리이하 까지만 가능합니다. "),
+              actions: [
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('확인'),
+                ),
+              ],
+            );
+          });
+      return;
+    }
+    if (joinName.length >= 8) {
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext ctx) {
+            return AlertDialog(
+              content: Text(" 이름은 7자리이하 까지만 가능합니다. "),
+              actions: [
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('확인'),
+                ),
+              ],
+            );
+          });
+      return;
+    }
 
-
-
+    if(!isValidEmail(joinEmail)){
+      showDialog(context: context,
+      barrierDismissible: false,
+      builder: (BuildContext ctx){
+        return AlertDialog(
+          content: Text("유효하지 않은 이메일 주소입니다."),
+          actions: [
+            InkWell(
+              onTap: (){Navigator.of(context).pop();
+                },
+              child: Text('확인'),
+            )
+          ],
+        );
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         title: Text("계정 만들기 "),
       ),
       body: Form(
-
         child: Center(
           child: ListView(
             shrinkWrap: true,
@@ -103,7 +183,7 @@ class _JoinPageState extends State<JoinPage> {
                 padding: const EdgeInsets.all(16.0),
                 child: TextFormField(
                   obscureText: true,
-                  controller: _password,
+                  controller: _pw,
                   validator: (value) =>
                       (value!.isEmpty) ? "패스워드를 입력 해 주세요 " : null,
                   style: style,
@@ -125,7 +205,9 @@ class _JoinPageState extends State<JoinPage> {
                       labelText: "Email",
                       border: OutlineInputBorder()),
                 ),
+
               ),
+
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Material(
@@ -135,7 +217,7 @@ class _JoinPageState extends State<JoinPage> {
                   child: MaterialButton(
                     onPressed: () {
                       join();
-                      },
+                    },
                     child: Text(
                       "계정 만들기",
                       style: style.copyWith(
@@ -151,6 +233,5 @@ class _JoinPageState extends State<JoinPage> {
         ),
       ),
     );
-
   }
 }
