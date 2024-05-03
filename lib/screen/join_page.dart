@@ -15,6 +15,7 @@ class _JoinPageState extends State<JoinPage> {
       fontSize: 20.0);
 
   //텍스트 입력값을 가져오는 Controller 단 입니다.
+
   TextEditingController _email = TextEditingController();
   TextEditingController _password = TextEditingController();
   TextEditingController _password2 = TextEditingController();
@@ -26,7 +27,9 @@ class _JoinPageState extends State<JoinPage> {
   final _key = GlobalKey<ScaffoldState>();
 
   @override
+  //initState 는 Flutter 위젯의 상태가 초기화될 때 호출되는 메소드입니다. 이 메소드는 StatefulWidget 클래스에서 오버라이드 하여 상태 초기화 로직을 구현할 수 있습니다.
   void initState() {
+    //super.initState 코드는 현재 클래스에서 오버라이드 된 initState() 메서드 내에서 상위 클래스의 initState() 메서드를 호출하는 것을 의미합니다.
     super.initState();
     _name = TextEditingController(text: "");
     _id = TextEditingController(text: "");
@@ -36,12 +39,14 @@ class _JoinPageState extends State<JoinPage> {
   }
 
   @override
+//여기서 dispose을 사용해서 메모리 누수를 방지한다. 한마디로 수도꼭지로 물을 틀었으면 다시 잠가준다고 생각하면 된다.
   void dispose() {
     _name.dispose();
     _id.dispose();
     _email.dispose();
     _password.dispose();
     _password2.dispose();
+    //super.dispose를 호출하여 부모 클래스의 dispose 메소드를 실행하여 추가적인 정리 작업을 수행할 수 있습니다.
     super.dispose();
   }
 
