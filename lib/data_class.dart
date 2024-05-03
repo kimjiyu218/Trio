@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'data_class.freezed.dart';
 part 'data_class.g.dart';
 
+
 @freezed
 class Person with _$Person {
   const factory Person({

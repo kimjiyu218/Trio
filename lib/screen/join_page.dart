@@ -48,6 +48,19 @@ class _JoinPageState extends State<JoinPage> {
     super.dispose();
   }
 
+  void join(){
+    String joinId =_id.text;
+    String joinPw = _password.text;
+    String joinName = _name.text;
+    String joinEmail = _email.text;
+
+    if(joinId.length <= 12){
+            showDialog(context: context, builder: bui)
+    }
+
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -121,9 +134,8 @@ class _JoinPageState extends State<JoinPage> {
                   color: Colors.red,
                   child: MaterialButton(
                     onPressed: () {
-
-
-                    },
+                      join();
+                      },
                     child: Text(
                       "계정 만들기",
                       style: style.copyWith(
@@ -139,5 +151,6 @@ class _JoinPageState extends State<JoinPage> {
         ),
       ),
     );
+
   }
 }
