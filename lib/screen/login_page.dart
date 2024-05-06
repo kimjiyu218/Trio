@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
+
 import 'package:trio/screen/join_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -81,40 +81,32 @@ class _LoginPageState extends State<LoginPage> {
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(bottom: 5),
-              height: 40,
-              width: 300,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(50),
-              ),
-              child: TextField(
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextFormField(
                 controller: _id,
+                validator: (value) =>
+                (value!.isEmpty) ? "아이디를 입력해 주세요 " : null,
                 decoration: InputDecoration(
-                  hintText: '아이디',
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 15),
-                ),
+                    prefixIcon: Icon(Icons.key),
+                    labelText: "ID",
+                    border: OutlineInputBorder()),
               ),
             ),
-            Container(
-              height: 40,
-              width: 300,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(50),
-              ),
-              child: TextField(
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextFormField(
+                obscureText: true,
                 controller: _pw,
+                validator: (value) =>
+                (value!.isEmpty) ? "패스워드를 입력 해 주세요 " : null,
                 decoration: InputDecoration(
-                  hintText: '비밀번호',
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 15),
-                ),
+                    prefixIcon: Icon(Icons.lock),
+                    labelText: "Password",
+                    border: OutlineInputBorder()),
               ),
             ),
-            SizedBox(height: 40),
+            SizedBox(height: 30),
             Center(
               child: ElevatedButton(
                 onPressed: () {
@@ -122,12 +114,12 @@ class _LoginPageState extends State<LoginPage> {
                 },
                 style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all<Color>(Color(0xFF009C89)),
+                      MaterialStateProperty.all<Color>(Color(0xFF001C89)),
                   padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                      EdgeInsets.symmetric(horizontal: 100, vertical: 10)),
+                      EdgeInsets.symmetric(horizontal: 140, vertical: 10)),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(50),
                     ),
                   ),
                   elevation: MaterialStateProperty.all<double>(3),
@@ -141,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                       '로그인',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 15,
+                        fontSize: 16,
                       ),
                     ),
                   ),
@@ -154,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                     MaterialPageRoute(builder: (context) => JoinPage()));
               },
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(160, 8, 0, 10),
+                padding: const EdgeInsets.fromLTRB(200, 8, 0, 0),
                 child: Container(
                   alignment: Alignment.centerRight,
                   width: 60,
